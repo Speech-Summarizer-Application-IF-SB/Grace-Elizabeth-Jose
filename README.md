@@ -35,8 +35,3 @@ You can open and run the Milestone 1 notebook here:
 [Open Milestone 1 Notebook in Colab](https://colab.research.google.com/drive/1VbdIEZP83VKNja8c9pOUVELQLWMse2f5?usp=sharing)
 
 ---
-
-## Next Steps
-- Integrate speaker diarization for multi-speaker meetings.
-- Real-time audio streaming and summarization.
-- Build a Streamlit interface for interactive usage.
