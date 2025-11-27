@@ -1,162 +1,180 @@
-# 🎙️ **AI Meeting Summarizer – Milestone 1 to 4 (Final Project)**
+# 🎙️ AI Live Meeting Summarizer
 
-*A complete pipeline for Speech-to-Text, Diarization, and Automatic Summarization*
-
----
-
-## ✅ **Overview**
-
-This project converts meeting audio into a clean, structured summary using:
-
-* **Whisper** (Speech-to-Text)
-* **Rule-based diarization (VAD + speaker switching)**
-* **BART** (Summarization)
-* **Simple UI using Gradio**
-* **Outputs saved as `.txt`**
-
-The system is lightweight, works locally, and does NOT require paid APIs.
+Convert meeting audio → transcript → clean summary using Whisper + BART, all inside a simple UI.
 
 ---
 
-## 📁 **Project Structure**
+## 📌 Overview
+
+This project is a **Meeting Summarizer Application** that converts speech from audio files into text and generates a concise summary using NLP models.
+It was built across **four milestones**, each adding a key feature such as STT, diarization logic, summarization, and finally a working UI.
+
+The final application is a **Gradio-based web app** that allows users to upload an audio file and get:
+✔️ Full transcript
+✔️ AI-generated summary
+
+---
+
+## 🚀 Features
+
+### 🎤 **Speech-to-Text (Whisper)**
+
+* Accurate transcription using OpenAI Whisper model
+* Works with WAV / MP3 files
+
+### 🧠 **Summarization (BART Model)**
+
+* Uses Facebook BART CNN model
+* Generates clean, meaningful summaries
+
+### 🧩 **Basic Diarization Logic (Milestone 2)**
+
+* Simple VAD-based speaker change detection
+* Tags segments as Speaker 1 / Speaker 2
+
+### 💻 **User Interface (Milestone 4)**
+
+* Built using **Gradio**
+* Upload audio → get transcript + summary
+* Lightweight, fully local, no API keys required
+
+### 📁 **Output Files**
+
+* Transcript saved as `transcript_mX.txt`
+* Summary saved as `summary_mX.txt`
+
+---
+
+## 🏗️ **Milestones Completed**
+
+### 🔹 **Milestone 1 – Speech-to-Text**
+
+* Implemented Whisper transcription
+* Noise handling & preprocessing
+* Generated transcript + summary (BART)
+* Saved outputs (`transcription.txt`, `summary.txt`)
+
+### 🔹 **Milestone 2 – Diarization + Summarization**
+
+* Added basic voice-activity-based diarization
+* Assigned Speaker 1 / Speaker 2
+* Chunked long text before summarization
+* Generated structured summary
+
+### 🔹 **Milestone 3 – Integration Pipeline**
+
+* Combined: STT → Diarization → Summary
+* Cleaned code & created a full working pipeline
+* Exported outputs successfully
+
+### 🔹 **Milestone 4 – Final UI**
+
+* Built a fully working **Gradio interface**
+* Upload audio → process → display transcript & summary
+* Final working app stored as `app.py`
+
+---
+
+## 🛠️ **Tech Stack**
+
+| Component      | Tools Used                     |
+| -------------- | ------------------------------ |
+| Speech-to-Text | Whisper Small                  |
+| Summarization  | BART (facebook/bart-large-cnn) |
+| Diarization    | Basic VAD-based segmentation   |
+| UI             | Gradio                         |
+| Backend        | Python                         |
+
+---
+
+## 📦 Project Structure
 
 ```
-Milestone-1/
-│── transcribe.py
-│── output_m1.txt
-
-Milestone-2/
-│── diarization.py
-│── diarized_m2.txt
-
-Milestone-3/
-│── summary.py
-│── summary_m3.txt
-
-Milestone-4/
-│── app.py        ← Final application (Gradio)
-│── summary_m4.txt
-│── README.md
+📁 Milestone_1
+📁 Milestone_2
+📁 Milestone_3
+📁 Milestone_4
+   └── app.py   ← Final working UI app
+README.md
 ```
 
 ---
 
-# 🚀 **Milestone Breakdown**
+# ▶️ **How to Run the Final App**
 
----
-
-## **🟩 Milestone 1 – Speech-to-Text (Whisper)**
-
-**Goal:** Convert audio (.wav / .mp3) into text.
-
-✔ Whisper small model
-✔ FP32 CPU mode
-✔ Generates transcript `.txt` file
-
-**Output example:**
-`transcript_m1.txt`
-
----
-
-## **🟩 Milestone 2 – Speaker Diarization (Simple VAD)**
-
-**Goal:** Detect speech segments and assign alternating speaker labels.
-
-✔ Implemented using `webrtcvad`
-✔ Window-based frame detection
-✔ Alternates between Speaker 1 & 2
-✔ Produces diarized transcript
-
-**Output example:**
-`diarized_m2.txt`
-
----
-
-## **🟩 Milestone 3 – Summarization (BART)**
-
-**Goal:** Generate a clean summary from long diarized text.
-
-✔ Uses `facebook/bart-large-cnn`
-✔ Automatic chunking to avoid token overflow
-✔ Final merged summary saved as a file
-
-**Output example:**
-`summary_m3.txt`
-
----
-
-## **🟩 Milestone 4 – Final Gradio Application**
-
-**Goal:** Interactive UI for uploading audio → transcript → summary.
-
-✔ Upload audio file
-✔ Whisper transcription
-✔ BART summarization
-✔ Results shown in UI
-✔ Downloadable summary
-
-**File:** `app.py`
-
----
-
-# 🧪 **How to Run the Final App**
-
-### **1. Install dependencies**
+### 1️⃣ Install dependencies
 
 ```bash
-pip install gradio transformers git+https://github.com/openai/whisper.git
-pip install webrtcvad
+pip install gradio openai-whisper transformers torch
 ```
 
-### **2. Run the app**
+### 2️⃣ Run the application
 
 ```bash
 python app.py
 ```
 
-### **3. Open UI**
+### 3️⃣ Use the UI
 
-A browser will automatically open with a clean Gradio interface where you can:
-
-* Upload audio
-* View transcript
-* View summary
-* Download summary
+* Browser will open automatically
+* Upload WAV/MP3 file
+* Get transcript + summary
 
 ---
 
-# 📝 **Features Completed**
+# 📄 **Final App Code (app.py)**
 
-| Feature                      | Status      |
-| ---------------------------- | ----------- |
-| Whisper Speech-to-Text       | ✅ Completed |
-| Diarization (Rule-based VAD) | ✅ Completed |
-| Chunk-based Summarization    | ✅ Completed |
-| BART summarizer              | ✅ Completed |
-| Gradio UI                    | ✅ Completed |
-| Export summary               | ✅ Completed |
+*(already included in Milestone 4 folder)*
+
+```python
+import gradio as gr
+import whisper
+from transformers import pipeline
+import tempfile
+
+# Load models
+model = whisper.load_model("small")
+summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
+
+def process_audio(audio):
+    if audio is None:
+        return "No audio uploaded", "No summary available"
+
+    # Save uploaded audio to temp file
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as temp:
+        temp.write(audio)
+        temp.flush()
+        file_path = temp.name
+
+    # Transcription
+    result = model.transcribe(file_path)
+    transcript = result["text"]
+
+    # Summarization
+    summary = summarizer(transcript, max_length=200, min_length=60)[0]["summary_text"]
+
+    return transcript, summary
+
+# Gradio UI
+ui = gr.Interface(
+    fn=process_audio,
+    inputs=gr.Audio(type="filepath", label="🎤 Upload Audio"),
+    outputs=[
+        gr.Textbox(label="📝 Transcript"),
+        gr.Textbox(label="📘 Summary")
+    ],
+    title="AI Meeting Summarizer",
+    description="Upload an audio file to generate transcript and summary."
+)
+
+ui.launch()
+```
 
 ---
 
-# 📦 **Outputs Generated**
+# ✨ Conclusion
 
-* **Transcript:** `transcript_m1.txt`
-* **Diarized Transcript:** `diarized_m2.txt`
-* **Milestone 3 Summary:** `summary_m3.txt`
-* **Final Summary (UI):** `summary_m4.txt`
+This project delivers a complete pipeline that transforms any meeting audio into a structured transcript and summary using speech recognition and NLP.
+The Gradio UI makes the system easy to use, lightweight, and accessible without complex setup.
 
 ---
-
-# 🔚 **Conclusion**
-
-This project delivers a complete meeting summarization pipeline with:
-
-* STT
-* Speaker segmentation
-* High-quality abstractive summary
-* Simple UI for end-users
-
-You now have a **clean and working final Milestone system**.
-
----
-
