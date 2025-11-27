@@ -1,4 +1,4 @@
-# 🎙️ AI Live Meeting Summarizer
+# 🎙️ AI Meeting Summarizer
 
 Convert meeting audio → transcript → clean summary using Whisper + BART, all inside a simple UI.
 
